@@ -1,4 +1,5 @@
 import java.io.IOException;
+import java.io.FileNotFoundException;
 import java.io.File;
 import java.io.FileWriter;
 import java.util.Scanner;
@@ -8,9 +9,9 @@ public class Star {
     boolean check_if_id_exists = true;
     int star_id;
     String star_name;
-    Scanner scannerObj = new Scanner(System.in);
 
     public void addStar() {
+        Scanner scannerObj = new Scanner(System.in);
         // Assign a random value to the ID
         while(check_if_id_exists) {
             star_id = ThreadLocalRandom.current().nextInt(1000, 10000);
@@ -42,5 +43,107 @@ public class Star {
         System.out.println("\nStar Created-");
         System.out.println("ID: " + star_id + "\nName: " + star_name + "\n");
 
+    }
+
+    public void viewStar(int id) {
+        File directory = new File("./database");
+        int flag = 0;
+        String[] stars_list = directory.list();
+        if (stars_list.length == 0) {
+            System.out.println("There are no stars to show.");
+        } else {
+            // Linear search in the array
+            for (int i = 0; i < stars_list.length; i++) {
+                String filename = stars_list[i];
+                if (filename.equalsIgnoreCase(id + ".txt")) {
+                    // Clear the console
+                    System.out.print("\033[H\033[2J");
+                    System.out.flush();
+                    System.out.println("**********STAR FOUND************");
+                    flag = 1;
+                    // Read the file
+                    try {
+                        File fileObj = new File("./database/" + filename);
+                        Scanner fileReader = new Scanner(fileObj);
+                        while (fileReader.hasNextLine()) {
+                            String data = fileReader.nextLine();
+                            System.out.println(data);
+                        }
+                        System.out.println("**********************************\n");
+                        fileReader.close();
+                    } catch (FileNotFoundException e) {
+                        System.out.println("An error occurred.");
+                        e.printStackTrace();
+                    }
+                }
+            }
+
+            // If file not found
+            if (flag == 0) {
+                System.out.println("Could not find any star with the ID " + id);
+            }
+        }
+    }
+
+    public void updateStar(int id) {
+        Scanner scannerObj = new Scanner(System.in);
+        File directory = new File("./database");
+        int flag = 0;
+        String[] stars_list = directory.list();
+        if (stars_list.length == 0) {
+            System.out.println("There are no stars in the Database.");
+        } else {
+            // Linear search in the array
+            for (int i = 0; i < stars_list.length; i++) {
+                String filename = stars_list[i];
+                if (filename.equalsIgnoreCase(id + ".txt")) {
+                    // Clear the console
+                    System.out.print("\033[H\033[2J");
+                    System.out.flush();
+                    System.out.println("**********STAR FOUND************\nCurrent Details: ");
+                    flag = 1;
+                    // Read the file
+                    try {
+                        File fileObj = new File("./database/" + filename);
+                        Scanner fileReader = new Scanner(fileObj);
+                        while (fileReader.hasNextLine()) {
+                            String data = fileReader.nextLine();
+                            System.out.println(data);
+                        }
+                        System.out.println("\nEdit Details:");
+                        
+                        System.out.println("What's the name of the star?");
+                        star_name = scannerObj.nextLine();
+
+                        // Write to database
+                        try {
+                            FileWriter fileWriter = new FileWriter("./database/"+id+".txt");
+                            fileWriter.write("ID: " + id + "\nName: " + star_name);
+                            fileWriter.close();
+                        } catch (IOException e) {
+                            System.out.println("An error occurred.");
+                            e.printStackTrace();
+                        }
+                        
+                        fileReader.close();
+
+                        // Clear the console
+                        System.out.print("\033[H\033[2J");
+                        System.out.flush();
+
+                        System.out.println("Star with the ID " + id + " was updated.\n");
+                        
+                    } catch (FileNotFoundException e) {
+                        System.out.println("An error occurred.");
+                        e.printStackTrace();
+                    }
+                }
+            }
+
+            // If file not found
+            if (flag == 0) {
+                System.out.println("Could not find any star with the ID " + id);
+            }
+        }
     }
 }

@@ -3,7 +3,7 @@ import java.util.Scanner;
 class Main {
     public static void main(String[] args) {
 
-        int choice;
+        int choice, id;
         boolean check = true;
         Scanner scannerObj = null;
         Star star = new Star();
@@ -39,12 +39,18 @@ class Main {
 
                     // View a star
                     case 2:
-                        System.out.println("View");
+                        System.out.println("Enter Star ID");
+                        id = scannerObj.nextInt();
+                        star.viewStar(id);
+                        check = true;
                         break;
 
                     // Update a star
                     case 3:
-                        System.out.println("update");
+                        System.out.println("Enter Star ID");
+                        id = scannerObj.nextInt();
+                        star.updateStar(id);
+                        check = true;
                         break;
 
                     // Delete a star
