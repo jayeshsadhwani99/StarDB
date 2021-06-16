@@ -6,6 +6,7 @@ class Main {
         int choice;
         boolean check = true;
         Scanner scannerObj = null;
+        Star star = new Star();
 
         // We do try-finally to close the scanner
         // ( The class using which we get input )
@@ -22,7 +23,7 @@ class Main {
 
                 // Options
                 System.out.println(
-                        "1. Add A Star\n2. View A Star\n3. Update Details of a star\n4. Delete A Star\n5. View All Stars");
+                        "1. Add A Star\n2. View A Star\n3. Update Details of a star\n4. Delete A Star\n5. View All Stars\n6. Exit");
 
                 System.out.println("Enter your choice: ");
 
@@ -32,7 +33,8 @@ class Main {
                 switch (choice) {
                     // Add a star
                     case 1:
-                        System.out.println("Add");
+                        star.addStar();
+                        check = true;
                         break;
 
                     // View a star
@@ -53,6 +55,11 @@ class Main {
                     // Read from the DB
                     case 5:
                         System.out.println("All");
+                        break;
+
+                    // Exit
+                    case 6:
+                        System.out.println("Bye. Thanks for Coming!");
                         break;
 
                     default:
