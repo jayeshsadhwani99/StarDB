@@ -63,7 +63,8 @@ class Main {
 
                     // Read from the DB
                     case 5:
-                        System.out.println("All");
+                        star.viewAllStars();
+                        check = true;
                         break;
 
                     // Exit

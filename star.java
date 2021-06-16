@@ -177,4 +177,38 @@ public class Star {
             }
         }
     }
+
+    public void viewAllStars() {
+        File directory = new File("./database");
+        String[] stars_list = directory.list();
+        if (stars_list.length == 0) {
+            System.out.println("There are no stars to show.\n");
+        } else {
+            // Clear the console
+            System.out.print("\033[H\033[2J");
+            System.out.flush();
+            System.out.println("**********" + stars_list.length + " STARS FOUND************");
+            
+            // Linear search in the array
+            for (int i = 0; i < stars_list.length; i++) {
+                String filename = stars_list[i];
+
+                // Read the files
+                try {
+                    File fileObj = new File("./database/" + filename);
+                    Scanner fileReader = new Scanner(fileObj);
+                    while (fileReader.hasNextLine()) {
+                        String data = fileReader.nextLine();
+                        System.out.println(data);
+                    }
+                    System.out.println("**********************************\n");
+                    fileReader.close();
+                } catch (FileNotFoundException e) {
+                    System.out.println("An error occurred.");
+                    e.printStackTrace();
+                }
+                
+            }
+        }
+    }
 }
