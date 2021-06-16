@@ -55,7 +55,10 @@ class Main {
 
                     // Delete a star
                     case 4:
-                        System.out.println("del");
+                        System.out.println("Enter Star ID");
+                        id = scannerObj.nextInt();
+                        star.deleteStar(id);
+                        check = true;
                         break;
 
                     // Read from the DB
