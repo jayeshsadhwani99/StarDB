@@ -98,7 +98,7 @@ public class star {
         File directory = new File("./database");
         int flag = 0;
         String[] stars_list = directory.list();
-        if (stars_list == null) {
+        if (stars_list == null || stars_list.length == 0) {
             System.out.println("There are no stars in the Database.");
         } else {
             // Linear search in the array
@@ -123,6 +123,10 @@ public class star {
                         // Edit the file
                         System.out.println("What's the name of the star?");
                         star_name = scannerObj.nextLine();
+                        System.out.println("What's the spectral class of the star?");
+                        star_class = scannerObj.nextLine();
+                        System.out.println("What's the Temperature of the star(in Kelvin)?");
+                        star_temp = scannerObj.nextFloat();
 
                         // Write to database
                         try {
@@ -161,7 +165,7 @@ public class star {
         File directory = new File("./database");
         int flag = 0;
         String[] stars_list = directory.list();
-        if (stars_list == null) {
+        if (stars_list == null || stars_list.length == 0) {
             System.out.println("There are no stars to show.");
         } else {
             // Linear search in the array
@@ -192,7 +196,7 @@ public class star {
     public void viewAllStars() {
         File directory = new File("./database");
         String[] stars_list = directory.list();
-        if (stars_list == null) {
+        if (stars_list == null || stars_list.length == 0) {
             // Clear the console
             System.out.print("\033[H\033[2J");
             System.out.flush();
