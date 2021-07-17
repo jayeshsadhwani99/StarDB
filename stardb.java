@@ -6,7 +6,7 @@ class Main {
         int choice, id;
         boolean check = true;
         Scanner scannerObj = null;
-        Star star = new Star();
+        star star = new star();
 
         // We do try-finally to close the scanner
         // ( The class using which we get input )
@@ -18,7 +18,7 @@ class Main {
 
             // Only run this code if the user
             // enters a valid choice
-            while(check) {
+            while (check) {
                 check = false;
 
                 // Options
@@ -76,7 +76,7 @@ class Main {
                         // Clear the console
                         System.out.print("\033[H\033[2J");
                         System.out.flush();
-                        
+
                         System.out.println("Invalid choice. Try Again!");
                         check = true;
                         break;
